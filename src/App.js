@@ -1,26 +1,36 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
+import { connect } from "react-redux";
+
 import './App.css';
+import UserDetail from './containers/UserDetail';
+import { searchUserAction } from './store/user.actions';
+import SearchUser from './components/SearchUser';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+class App extends Component {
+  render() {
+    const { searchUser, user, userError } = this.props;
+     
+    return (
+      <div>
+        {user 
+          ? <UserDetail user={user}/>
+          : <SearchUser
+              searchUser={searchUser}
+            />
+        }
+        {userError && <div>Error Occured, please try again later.</div>}
+      </div>
+    );
+  }
+};
 
-export default App;
+const mapStateToProps = (state) => ({
+  user: state.user,
+  userError: state.userError
+});
+
+const mapDispatchToProps = dispatch => ({
+  searchUser: (username) => dispatch(searchUserAction(username))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

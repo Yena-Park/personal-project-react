@@ -1,5 +1,5 @@
 {
-  "name": "personal-project-react",
+  "name": "personal-project",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -9,6 +9,7 @@
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-devtools-extension": "^2.13.8",
+    "redux-thunk": "^2.3.0",
     "thunk": "0.0.1"
   },
   "scripts": {
